@@ -58,6 +58,28 @@ Profiler::Profiler() {
     startTimes.reserve(100);       
     elapsedTimes.reserve(1000000); 
 }
+
+void Profiler::EnterSection(const char* section) {
+    // startTimes.push_back(RecordStart(section, ));
+}
+
+void Profiler::ExitSection(const char* section, const char* file, const char* function, int line) {
+    // double stopTime = RetrieveTimeInSeconds();
+    // double elapsedTime = stopTime - startTimes.back().startSeconds;
+    // elapsedTimes.push_back(RecordStop(section, elapsedTime, line, file, function));
+    // startTimes.pop_back();
+    // if (stats.find(section) == stats.end()) {
+    //     stats[section] = new ProfilerStats(section, file, function, line);
+    // } else {
+    //     ProfilerStats* stat = stats[section];
+    //     stat->callCount++;
+    //     stat->totalTime += elapsedTime;
+    //     stat->minDuration = min(stat->minDuration, elapsedTime);
+    //     stat->maxDuration = max(stat->maxDuration, elapsedTime);
+    //     return 0;
+    // }
+}
+
 Profiler::~Profiler() {}
 // Function to print profiler statistics to a CSV file.
 void Profiler::printStatsToCSV(const char* fileName) {
