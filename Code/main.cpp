@@ -120,7 +120,6 @@ int main() {
     // test4(); // Interweaving test
     // test5(); // DFS test
     // sleepTest(); // Simulate sleep with profiling
-    // Print profiler statistics to the console and to CSV/JSON files
     displayProfilerStats();
     exportProfilerStatsCSV("ProfilerStats.csv");
     exportProfilerStatsJSON("ProfilerStats.json");

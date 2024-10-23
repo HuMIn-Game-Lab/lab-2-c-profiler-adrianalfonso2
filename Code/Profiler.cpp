@@ -13,7 +13,6 @@
 using namespace std;
 using namespace nlohmann;
 
-// Global profiler pointer
 Profiler* Profiler::globalProfilerInstance = nullptr;
 
 // Define macros for easy entry/exit of profiler sections.
@@ -23,7 +22,6 @@ Profiler* Profiler::globalProfilerInstance = nullptr;
 #define exportProfilerStatsCSV(fileName) globalProfilerInstance->printStatsToCSV(fileName)
 #define exportProfilerStatsJSON(fileName) globalProfilerInstance->printStatsToJSON(fileName)
 
-// Destructor for TimeRecordStart, currently empty.
 RecordStart::~RecordStart() {}
 
 // Constructor for TimeRecordStop, records section name and elapsed time.
@@ -31,7 +29,6 @@ RecordStop::RecordStop(const char* section, double stopTimeInSeconds) {
     this->section = section;
     this->elapsedTime = stopTimeInSeconds;
 }
-
 // Extended constructor with more details: line, file, and function names.
 RecordStop::RecordStop(const char* section, double timeElapsed, int line, const char* file, const char* function) {
     this->section = section;
@@ -56,17 +53,12 @@ ProfilerStats::ProfilerStats(const char* section, const char* fileName, const ch
     this->functionName = funcName;
     this->lineNumber = lineNum;
 }
-
-// Constructor for Profiler.
 Profiler::Profiler() {
-    globalProfilerInstance = this; // Set global profiler instance to this object.
-    startTimes.reserve(100);       // Preallocate vector for start times.
-    elapsedTimes.reserve(1000000); // Preallocate vector for elapsed times.
+    globalProfilerInstance = this; 
+    startTimes.reserve(100);       
+    elapsedTimes.reserve(1000000); 
 }
-
-// Destructor for Profiler.
 Profiler::~Profiler() {}
-
 // Function to print profiler statistics to a CSV file.
 void Profiler::printStatsToCSV(const char* fileName) {
     ofstream csvFile("Data/ProfilerStats.csv"); // Create output CSV file.
@@ -85,11 +77,23 @@ void Profiler::printStatsToCSV(const char* fileName) {
         cout << "Unable to open the CSV file.";
     }
 }
+void Profiler:: printStats() {
+    for (auto& stat : stats) {
+        cout << "Section: " << stat.first << endl;
+        cout << "Call Count: " << stat.second->callCount << endl;
+        cout << "Total Time: " << stat.second->totalTime << endl;
+        cout << "Min Time: " << stat.second->minDuration << endl;
+        cout << "Max Time: " << stat.second->maxDuration << endl;
+        cout << "Avg Time: " << stat.second->totalTime / stat.second->callCount << endl;
+        cout << "File Name: " << stat.second->fileName << endl;
+        cout << "Function Name: " << stat.second->functionName << endl;
+        cout << "Line Number: " << stat.second->lineNumber << endl;
+        cout << endl;
+    }
+}
 
-// Function to print profiler statistics to a JSON file.
 void Profiler::printStatsToJSON(const char* fileName) {
     ordered_json jsonStats;
-
     for (auto& stat : stats) {
         ordered_json sectionJson;
         sectionJson["Section"] = stat.first;
@@ -101,7 +105,6 @@ void Profiler::printStatsToJSON(const char* fileName) {
         sectionJson["File Name"] = stat.second->fileName;
         sectionJson["Function Name"] = stat.second->functionName;
         sectionJson["Line Number"] = stat.second->lineNumber;
-
         jsonStats.push_back(sectionJson);
     }
 
@@ -109,17 +112,14 @@ void Profiler::printStatsToJSON(const char* fileName) {
     jsonFile << jsonStats.dump(4);                // Pretty print with indent of 4.
     jsonFile.close();
 }
-
 // Getter for start times vector.
 vector<RecordStart> Profiler::getStartTimes() {
     return startTimes;
 }
-
 // Getter for elapsed times vector.
 vector<RecordStop> Profiler::getElapsedTimes() {
     return elapsedTimes;
 }
-
 // Getter for statistics map.
 map<const char*, ProfilerStats*> Profiler::getStats() {
     return stats;
