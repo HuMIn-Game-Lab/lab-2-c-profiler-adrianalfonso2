@@ -1,2 +1,4 @@
-compile: 
-	clang++ -g -std=c++14 ./Code/*.cpp -o output
+compile:
+	clear
+	clang++ -g -std=c++17 ./Code/*.cpp -o output
+	./output
