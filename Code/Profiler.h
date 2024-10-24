@@ -10,8 +10,10 @@
 using namespace std;
 class RecordStart {
 public:
-    RecordStart(const char* section, double startSeconds)
-        : section(section), startSeconds(startSeconds) {} // Constructor initializes section name and start time.
+    RecordStart(const char* section,
+     double startSeconds)
+        : section(section),
+         startSeconds(startSeconds) {} // Constructor initializes section name and start time.
     ~RecordStart(); // Destructor.
     const char* section;  // Name of the section.
     double startSeconds;  // Time when the section starts.
@@ -19,8 +21,11 @@ public:
 // TimeRecordStop class that records the stop time and elapsed time of a section.
 class RecordStop {
 public:
-    RecordStop(const char* section, double stopSeconds);
-    RecordStop(const char* section, double elapsedSeconds, int line, const char* file, const char* function);
+    RecordStop(const char* section, 
+    double stopSeconds);
+    RecordStop(const char* section, 
+    double elapsedSeconds, int line, const char* file,
+     const char* function);
     ~RecordStop(); 
     const char* section;   // Name of the section.
     double elapsedTime;    // Elapsed time in seconds.
