@@ -1,4 +1,5 @@
 #include <mutex>
+#include <stack>
 #include <map>
 #pragma once 
 #include <vector>
@@ -71,11 +72,9 @@ public:
 private:
     void ReportSectionTime(const char* section, double elapsedSeconds);
     void ReportSectionTime(const char* section, double elapsedSeconds, int line, const char* file, const char* function);
-    map<const char*, ProfilerStats*> stats;  
     vector<RecordStart> startTimes;     
     vector<RecordStop> elapsedTimes;     
-    stack<const char*> sectionStack;
-    map<const char*, ProfilerStats*> stats;
+    std::map<const char*, ProfilerStats*> stats;
     std::stack<std::string> sectionStack;
     std::mutex profilerMutex;
 };

@@ -1,6 +1,5 @@
 #include <cfloat>
 #include <cstdlib>
-#include <stack>
 #include "Profiler.h"
 #include <vector>
 #include <map>
