@@ -1,2 +1,2 @@
 #pragma once
-double RetireveTimeInSecond(); 
+double RetireveTimeInSecond();

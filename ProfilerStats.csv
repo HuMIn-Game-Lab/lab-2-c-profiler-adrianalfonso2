@@ -1,0 +1,10 @@
+Section, Count, Total Time, Min Time, Max Time, Avg Time, File Name, Function Name, Line Number
+EfficientQuickSort, 1000, 0.085977, 7.6084e-05, 0.000200916, 8.5977e-05, ./Code/main.cpp, efficientQuickSort, 42
+InefficientQuickSort, 1000, 0.0859543, 7.5916e-05, 0.000170708, 8.59543e-05, ./Code/main.cpp, inefficientQuickSort, 62
+DFSHelper, 14, 4.6499e-05, 2.5e-07, 1.8583e-05, 3.32136e-06, ./Code/main.cpp, depthFirstSearchHelper, 73
+DFSTest, 1, 0, 1.79769e+308, 0, 0, ./Code/main.cpp, dfsTest, 101
+ShortSleepTest, 10, 0.932547, 0.100083, 0.105046, 0.0932547, ./Code/main.cpp, sleepTest, 109
+LongSleepTest, 10, 1.87415, 0.202965, 0.211904, 0.187415, ./Code/main.cpp, sleepTest, 111
+1SecondTest, 1, 0, 1.79769e+308, 0, 0, ./Code/main.cpp, test3, 118
+InterleaveA, 1, 0, 1.79769e+308, 0, 0, ./Code/main.cpp, test4, 126
+InterleaveB, 1, 0, 1.79769e+308, 0, 0, ./Code/main.cpp, test4, 128

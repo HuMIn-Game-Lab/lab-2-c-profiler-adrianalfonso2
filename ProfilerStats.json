@@ -1,0 +1,101 @@
+[
+    {
+        "Section": "EfficientQuickSort",
+        "Call Count": 1000,
+        "Total Time": 0.08597695000000012,
+        "Min Time": 7.608400000000404e-05,
+        "Max Time": 0.0002009159999999989,
+        "Avg Time": 8.597695000000013e-05,
+        "File Name": "./Code/main.cpp",
+        "Function Name": "efficientQuickSort",
+        "Line Number": 42
+    },
+    {
+        "Section": "InefficientQuickSort",
+        "Call Count": 1000,
+        "Total Time": 0.08595432200000024,
+        "Min Time": 7.59160000000092e-05,
+        "Max Time": 0.00017070799999999164,
+        "Avg Time": 8.595432200000024e-05,
+        "File Name": "./Code/main.cpp",
+        "Function Name": "inefficientQuickSort",
+        "Line Number": 62
+    },
+    {
+        "Section": "DFSHelper",
+        "Call Count": 14,
+        "Total Time": 4.649899999997764e-05,
+        "Min Time": 2.500000000349445e-07,
+        "Max Time": 1.8582999999905425e-05,
+        "Avg Time": 3.321357142855546e-06,
+        "File Name": "./Code/main.cpp",
+        "Function Name": "depthFirstSearchHelper",
+        "Line Number": 73
+    },
+    {
+        "Section": "DFSTest",
+        "Call Count": 1,
+        "Total Time": 0.0,
+        "Min Time": 1.7976931348623157e+308,
+        "Max Time": 0.0,
+        "Avg Time": 0.0,
+        "File Name": "./Code/main.cpp",
+        "Function Name": "dfsTest",
+        "Line Number": 101
+    },
+    {
+        "Section": "ShortSleepTest",
+        "Call Count": 10,
+        "Total Time": 0.9325473329999998,
+        "Min Time": 0.10008250000000007,
+        "Max Time": 0.10504574999999994,
+        "Avg Time": 0.09325473329999998,
+        "File Name": "./Code/main.cpp",
+        "Function Name": "sleepTest",
+        "Line Number": 109
+    },
+    {
+        "Section": "LongSleepTest",
+        "Call Count": 10,
+        "Total Time": 1.8741462080000002,
+        "Min Time": 0.20296500000000006,
+        "Max Time": 0.21190375000000028,
+        "Avg Time": 0.18741462080000001,
+        "File Name": "./Code/main.cpp",
+        "Function Name": "sleepTest",
+        "Line Number": 111
+    },
+    {
+        "Section": "1SecondTest",
+        "Call Count": 1,
+        "Total Time": 0.0,
+        "Min Time": 1.7976931348623157e+308,
+        "Max Time": 0.0,
+        "Avg Time": 0.0,
+        "File Name": "./Code/main.cpp",
+        "Function Name": "test3",
+        "Line Number": 118
+    },
+    {
+        "Section": "InterleaveA",
+        "Call Count": 1,
+        "Total Time": 0.0,
+        "Min Time": 1.7976931348623157e+308,
+        "Max Time": 0.0,
+        "Avg Time": 0.0,
+        "File Name": "./Code/main.cpp",
+        "Function Name": "test4",
+        "Line Number": 126
+    },
+    {
+        "Section": "InterleaveB",
+        "Call Count": 1,
+        "Total Time": 0.0,
+        "Min Time": 1.7976931348623157e+308,
+        "Max Time": 0.0,
+        "Avg Time": 0.0,
+        "File Name": "./Code/main.cpp",
+        "Function Name": "test4",
+        "Line Number": 128
+    }
+]
