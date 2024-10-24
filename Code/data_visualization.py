@@ -6,8 +6,8 @@ pd.set_option('display.max_columns', 50)
 pd.set_option('display.max_rows', 100)
 pd.set_option('display.max_colwidth', 100)
 
-file_path = 'Data/ProfilerStats.csv'
-data = pd.read_csv(file_path)
+file_path = ('Data/ProfilerStats.csv')
+data = pd.read_csv("ProfilerStats.csv")
 
 data.plot(x='Section', y='Avg Time', kind='bar', color='orange')
 plt.title('Avg Time per Section')

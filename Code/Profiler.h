@@ -1,3 +1,4 @@
+#include <mutex>
 #include <map>
 #pragma once 
 #include <vector>
@@ -34,11 +35,13 @@ public:
     const char* function;  // Function name where the section was timed.
 };
 
-// ProfilerStats class stores statistics related to a particular section.
 class ProfilerStats {
 public:
-    ProfilerStats(const char* section, const char* fileName, const char* funcName, int lineNumber);
-    ~ProfilerStats(); // Destructor.
+    ProfilerStats(const char* section, 
+    const char* fileName, 
+    const char* funcName, 
+    int lineNumber);
+    ~ProfilerStats(); 
     const char* section;   // Section name.
     int callCount;         // Number of times the section has been called.
     double totalTime;      // Total time accumulated for the section.
@@ -47,12 +50,14 @@ public:
     double avgDuration;    // Average duration of calls to this section.
     const char* fileName;  // Name of the file where the section is timed.
     const char* functionName;  // Name of the function where the section is timed.
-    int lineNumber;        // Line number where the section was timed.
+    int lineNumber; 
+private:
+    std::mutex profilerMutex; // Mutex to protect the statistics.
 };
 class Profiler {
 public:
-    Profiler();  // Constructor.
-    ~Profiler(); // Destructor.
+    Profiler();  
+    ~Profiler(); 
     void EnterSection(const char* section);
     void ExitSection(const char* section, const char* file, const char* function, int line);
     void printStats();
@@ -66,7 +71,11 @@ public:
 private:
     void ReportSectionTime(const char* section, double elapsedSeconds);
     void ReportSectionTime(const char* section, double elapsedSeconds, int line, const char* file, const char* function);
-    map<const char*, ProfilerStats*> stats;  // Stores the statistics for each section.
-    vector<RecordStart> startTimes;      // Records the start times of sections.
-    vector<RecordStop> elapsedTimes;     // Records the stop and elapsed times of sections.
+    map<const char*, ProfilerStats*> stats;  
+    vector<RecordStart> startTimes;     
+    vector<RecordStop> elapsedTimes;     
+    stack<const char*> sectionStack;
+    map<const char*, ProfilerStats*> stats;
+    std::stack<std::string> sectionStack;
+    std::mutex profilerMutex;
 };

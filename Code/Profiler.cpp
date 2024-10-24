@@ -1,6 +1,7 @@
-#include "Profiler.h"
 #include <cfloat>
 #include <cstdlib>
+#include <stack>
+#include "Profiler.h"
 #include <vector>
 #include <map>
 #include "program_time.h"
@@ -33,7 +34,10 @@ const char* function) {
     this->function = function;
 }
 RecordStop::~RecordStop() {}
-ProfilerStats::ProfilerStats(const char* section, const char* fileName, const char* funcName, int lineNum) {
+ProfilerStats::ProfilerStats(const char* section, 
+const char* fileName, 
+const char* funcName, 
+int lineNum) {
     this->section = section;
     callCount = 1;
     totalTime = 0;
@@ -50,6 +54,8 @@ Profiler::Profiler() {
     elapsedTimes.reserve(1000000);
 }
 void Profiler::EnterSection(const char* section) {
+    std::lock_guard<std::mutex> lock(profilerMutex);
+    sectionStack.push(section);
     double startTime = RetireveTimeInSecond();
     startTimes.push_back(RecordStart(section, startTime));
 }
@@ -57,16 +63,17 @@ void Profiler::ExitSection(const char* section,
  const char* file, 
  const char* function, 
  int line) {
+    std::lock_guard<std::mutex> lock(profilerMutex);
     double stopTime = RetireveTimeInSecond();
     double elapsedTime = stopTime - startTimes.back().startSeconds;
     elapsedTimes.push_back(RecordStop(section, 
     elapsedTime, line,
     file, function));
     startTimes.pop_back();
+    sectionStack.pop();
     if (stats.find(section) == stats.end()) {
         stats[section] = new ProfilerStats(section, 
-        file, function, 
-        line);
+        file, function, line);
     } else {
         ProfilerStats* stat = stats[section];
         stat->callCount++;

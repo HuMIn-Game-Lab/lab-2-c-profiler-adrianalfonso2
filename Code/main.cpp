@@ -3,6 +3,8 @@
 #include <iostream>
 #include <queue>
 #include <cstdlib>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 Profiler *globalProfiler = new Profiler();
