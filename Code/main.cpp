@@ -60,7 +60,7 @@ void inefficientQuickSort() {
     endProfileSection("InefficientQuickSort");
 }
 
-void depthFirstSearchHelper(int vertex, vector<bool>& visited, const vector<int> adjacencyList[]) {
+void depthFirstSearchHelper(int vertex, std::vector<bool>& visited, const std::vector<std::vector<int>>& adjacencyList) {
     visited[vertex] = true;
     for (int adjacentVertex : adjacencyList[vertex]) {
         startProfileSection("DFSHelper");
@@ -71,27 +71,23 @@ void depthFirstSearchHelper(int vertex, vector<bool>& visited, const vector<int>
     }
 }
 
-void depthFirstSearch(int startVertex, const vector<int> adjacencyList[], int vertexCount) {
-    vector<bool> visited(vertexCount, false);
+void depthFirstSearch(int startVertex, const std::vector<std::vector<int>>& adjacencyList, int vertexCount) {    vector<bool> visited(vertexCount, false);
     depthFirstSearchHelper(startVertex, visited, adjacencyList);
 }
 
 void dfsTest() {
-    int vertices = 0;
-    vector<int> adjacencyList[vertices];
+    int vertices = 5;
+    std::vector<std::vector<int>> adjacencyList(vertices);
     adjacencyList[0].push_back(1);
     adjacencyList[0].push_back(4);
     adjacencyList[1].push_back(0);
     adjacencyList[1].push_back(2);
-    adjacencyList[1].push_back(3);
     adjacencyList[1].push_back(4);
     adjacencyList[2].push_back(1);
     adjacencyList[2].push_back(3);
     adjacencyList[3].push_back(1);
-    adjacencyList[3].push_back(2);
     adjacencyList[3].push_back(4);
     adjacencyList[4].push_back(0);
-    adjacencyList[4].push_back(1);
     adjacencyList[4].push_back(3);
     startProfileSection("DFSTest");
     depthFirstSearch(0, adjacencyList, vertices);
