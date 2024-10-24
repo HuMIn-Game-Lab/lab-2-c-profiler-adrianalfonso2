@@ -32,7 +32,6 @@ void quickSortEfficient(vector<int>& arr, int low, int high) {
         }
     }
 }
-
 void efficientQuickSort() {
     vector<int> randomValues;
     for (int i = 0; i < 1000; i++) {
@@ -42,7 +41,6 @@ void efficientQuickSort() {
     quickSortEfficient(randomValues, 0, randomValues.size() - 1);
     endProfileSection("EfficientQuickSort");
 }
-
 void quickSortInefficient(vector<int>& arr, int low, int high) {
     if (low < high) {
         int pivotIndex = partition(arr, low, high);
@@ -50,7 +48,6 @@ void quickSortInefficient(vector<int>& arr, int low, int high) {
         quickSortInefficient(arr, pivotIndex + 1, high);
     }
 }
-
 void inefficientQuickSort() {
     vector<int> randomValues;
     for (int i = 0; i < 1000; i++) {
@@ -98,7 +95,6 @@ void dfsTest() {
     depthFirstSearch(0, adjacencyList, vertices);
     endProfileSection("DFSTest");
 }
-
 void sleepTest() {
     for (int i = 0; i < 10; i++) {
         startProfileSection("ShortSleepTest");
@@ -109,7 +105,6 @@ void sleepTest() {
         endProfileSection("LongSleepTest");
     }
 }
-
 int main() {
     for (int i = 0; i < 1000; i++) {
         efficientQuickSort();

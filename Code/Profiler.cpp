@@ -1,36 +1,38 @@
 #include "Profiler.h"
-#include "program_time.h"
-#include <iostream>
+#include <cfloat>
 #include <cstdlib>
 #include <vector>
 #include <map>
+#include "program_time.h"
 #include <fstream>
 #include <iomanip>
-#include <cfloat>
+#include <iostream>
 #include "json.h"
-
 using namespace std;
 using namespace nlohmann;
 
 Profiler* Profiler::globalProfilerInstance = nullptr;
-
 RecordStart::~RecordStart() {}
-
-RecordStop::RecordStop(const char* section, double stopTimeInSeconds) {
+RecordStop::RecordStop(const char* 
+section, 
+double stopTimeInSeconds) 
+{
     this->section = section;
     this->elapsedTime = stopTimeInSeconds;
 }
 
-RecordStop::RecordStop(const char* section, double timeElapsed, int line, const char* file, const char* function) {
+RecordStop::RecordStop(const char* section, 
+double timeElapsed, 
+int line, 
+const char* file, 
+const char* function) {
     this->section = section;
     this->elapsedTime = timeElapsed;
     this->line = line;
     this->file = file;
     this->function = function;
 }
-
 RecordStop::~RecordStop() {}
-
 ProfilerStats::ProfilerStats(const char* section, const char* fileName, const char* funcName, int lineNum) {
     this->section = section;
     callCount = 1;
@@ -42,25 +44,29 @@ ProfilerStats::ProfilerStats(const char* section, const char* fileName, const ch
     this->functionName = funcName;
     this->lineNumber = lineNum;
 }
-
 Profiler::Profiler() {
     globalProfilerInstance = this;
     startTimes.reserve(100);
     elapsedTimes.reserve(1000000);
 }
-
 void Profiler::EnterSection(const char* section) {
     double startTime = RetireveTimeInSecond();
     startTimes.push_back(RecordStart(section, startTime));
 }
-
-void Profiler::ExitSection(const char* section, const char* file, const char* function, int line) {
+void Profiler::ExitSection(const char* section,
+ const char* file, 
+ const char* function, 
+ int line) {
     double stopTime = RetireveTimeInSecond();
     double elapsedTime = stopTime - startTimes.back().startSeconds;
-    elapsedTimes.push_back(RecordStop(section, elapsedTime, line, file, function));
+    elapsedTimes.push_back(RecordStop(section, 
+    elapsedTime, line,
+    file, function));
     startTimes.pop_back();
     if (stats.find(section) == stats.end()) {
-        stats[section] = new ProfilerStats(section, file, function, line);
+        stats[section] = new ProfilerStats(section, 
+        file, function, 
+        line);
     } else {
         ProfilerStats* stat = stats[section];
         stat->callCount++;
@@ -69,12 +75,9 @@ void Profiler::ExitSection(const char* section, const char* file, const char* fu
         stat->maxDuration = max(stat->maxDuration, elapsedTime);
     }
 }
-
 Profiler::~Profiler() {}
-
 void Profiler::printStatsToCSV(const char* fileName) {
     ofstream csvFile(fileName);
-
     if (csvFile.is_open()) {
         csvFile << "Section, Count, Total Time, Min Time, Max Time, Avg Time, File Name, Function Name, Line Number\n";
         for (auto& stat : stats) {
@@ -89,7 +92,6 @@ void Profiler::printStatsToCSV(const char* fileName) {
         cout << "Unable to open the CSV file.";
     }
 }
-
 void Profiler::printStats() {
     for (auto& stat : stats) {
         cout << "Section: " << stat.first << endl;
@@ -104,7 +106,6 @@ void Profiler::printStats() {
         cout << endl;
     }
 }
-
 void Profiler::printStatsToJSON(const char* fileName) {
     ordered_json jsonStats;
     for (auto& stat : stats) {
@@ -120,20 +121,16 @@ void Profiler::printStatsToJSON(const char* fileName) {
         sectionJson["Line Number"] = stat.second->lineNumber;
         jsonStats.push_back(sectionJson);
     }
-
     ofstream jsonFile(fileName);
     jsonFile << jsonStats.dump(4);
     jsonFile.close();
 }
-
 vector<RecordStart> Profiler::getStartTimes() {
     return startTimes;
 }
-
 vector<RecordStop> Profiler::getElapsedTimes() {
     return elapsedTimes;
 }
-
 map<const char*, ProfilerStats*> Profiler::getStats() {
     return stats;
 }
