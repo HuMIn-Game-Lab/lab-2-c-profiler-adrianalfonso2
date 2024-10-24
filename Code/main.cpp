@@ -67,6 +67,9 @@ void depthFirstSearchHelper(int vertex,
     for (int adjacentVertex : adjacencyList[vertex]) {
         startProfileSection("DFSHelper");
         if (!visited[adjacentVertex]) {
+            for (int i = 0; i < 10000; ++i){
+                int dummy = i * i;
+            }
             depthFirstSearchHelper(adjacentVertex, visited, adjacencyList);
         }
         endProfileSection("DFSHelper");

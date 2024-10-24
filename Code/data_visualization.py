@@ -9,12 +9,20 @@ pd.set_option('display.max_colwidth', 100)
 file_path = ('Data/ProfilerStats.csv')
 data = pd.read_csv("ProfilerStats.csv")
 
-data.plot(x='Section', y='Avg Time', kind='bar', color='orange')
-plt.title('Avg Time per Section')
-plt.xlabel('Section')
-plt.ylabel('Avg Time (Sec)')
-plt.xticks(rotation=45)
-plt.show()
+if 'Avg Time' in data.columns:
+    data = data[data['Avg Time'] > 0]  
+
+    if not data.empty:
+        data.plot(x='Section', y='Avg Time', kind='bar', color='orange')
+        plt.title('Avg Time per Section')
+        plt.xlabel('Section')
+        plt.ylabel('Avg Time (Sec)')
+        plt.xticks(rotation=45)
+        plt.show()
+    else:
+        print("No valid data to plot for 'Avg Time'.")
+else:
+    print("Error: 'Avg Time' column not found in the CSV file.")
 
 data.plot(x='Section', y='Total Time', kind='bar', color='blue')
 plt.title('Total Time per Section')
