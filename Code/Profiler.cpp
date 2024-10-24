@@ -64,21 +64,23 @@ void Profiler::ExitSection(const char* section,
  int line) {
     std::lock_guard<std::mutex> lock(profilerMutex);
     double stopTime = RetireveTimeInSecond();
-    double elapsedTime = stopTime - startTimes.back().startSeconds;
-    elapsedTimes.push_back(RecordStop(section, 
-    elapsedTime, line,
-    file, function));
-    startTimes.pop_back();
-    sectionStack.pop();
+    if (!startTimes.empty()) {
+        double elapsedTime = stopTime - startTimes.back().startSeconds;
+        elapsedTimes.push_back(RecordStop(section, elapsedTime, line, file, function));
+        startTimes.pop_back();  
+    }
+    if (!sectionStack.empty()) {
+        sectionStack.pop();  
+    }
+    double elapsedTime = stopTime - startTimes.back().startSeconds;  
     if (stats.find(section) == stats.end()) {
-        stats[section] = new ProfilerStats(section, 
-        file, function, line);
+        stats[section] = new ProfilerStats(section, file, function, line);
     } else {
         ProfilerStats* stat = stats[section];
         stat->callCount++;
         stat->totalTime += elapsedTime;
-        stat->minDuration = min(stat->minDuration, elapsedTime);
-        stat->maxDuration = max(stat->maxDuration, elapsedTime);
+        stat->minDuration = std::min(stat->minDuration, elapsedTime);
+        stat->maxDuration = std::max(stat->maxDuration, elapsedTime);
     }
 }
 Profiler::~Profiler() {}
