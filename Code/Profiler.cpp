@@ -33,20 +33,7 @@ const char* function) {
     this->function = function;
 }
 RecordStop::~RecordStop() {}
-ProfilerStats::ProfilerStats(const char* section, 
-const char* fileName, 
-const char* funcName, 
-int lineNum) {
-    this->section = section;
-    callCount = 1;
-    totalTime = 0;
-    minDuration = DBL_MAX;
-    maxDuration = 0;
-    avgDuration = 0;
-    this->fileName = fileName;
-    this->functionName = funcName;
-    this->lineNumber = lineNum;
-}
+
 Profiler::Profiler() {
     globalProfilerInstance = this;
     startTimes.reserve(100);
@@ -81,6 +68,7 @@ void Profiler::ExitSection(const char* section,
         stat->totalTime += elapsedTime;
         stat->minDuration = std::min(stat->minDuration, elapsedTime);
         stat->maxDuration = std::max(stat->maxDuration, elapsedTime);
+        stat->avgDuration = stat->totalTime / stat->callCount;  
     }
 }
 Profiler::~Profiler() {}

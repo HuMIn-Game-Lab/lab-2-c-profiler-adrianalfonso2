@@ -1,6 +1,7 @@
 #include <mutex>
 #include <stack>
 #include <map>
+#include <cfloat>
 #pragma once 
 #include <vector>
 #define endProfileSection(section) Profiler::globalProfilerInstance->ExitSection(section, __FILE__, __FUNCTION__, __LINE__)
@@ -41,7 +42,16 @@ public:
     ProfilerStats(const char* section, 
     const char* fileName, 
     const char* funcName, 
-    int lineNumber);
+    int lineNumber): 
+      section(section), 
+      callCount(1), 
+      totalTime(0), 
+      minDuration(DBL_MAX), 
+      maxDuration(0), 
+      avgDuration(0), 
+      fileName(fileName), 
+      functionName(funcName), 
+      lineNumber(lineNumber) {}
     ~ProfilerStats(); 
     const char* section;   // Section name.
     int callCount;         // Number of times the section has been called.
