@@ -22,6 +22,7 @@ public:
     RecordStop(const char* section, double stopSeconds);
     RecordStop(const char* section, double elapsedSeconds, int line, const char* file, const char* function);
     ~RecordStop(); 
+    const char* section;   // Name of the section.
     double elapsedTime;    // Elapsed time in seconds.
     int line;              // Line number where the section was timed.
     const char* file;      // File name where the section was timed.
