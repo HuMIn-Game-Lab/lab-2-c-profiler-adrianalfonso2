@@ -24,9 +24,15 @@ if 'Avg Time' in data.columns:
 else:
     print("Error: 'Avg Time' column not found in the CSV file.")
 
-data.plot(x='Section', y='Total Time', kind='bar', color='blue')
-plt.title('Total Time per Section')
-plt.xlabel('Section')
-plt.ylabel('Total Time')
-plt.xticks(rotation=45)
-plt.show()
+if 'Total Time' in data.columns:
+    if not data.empty:
+        data.plot(x='Section', y='Total Time', kind='bar', color='blue')
+        plt.title('Total Time per Section')
+        plt.xlabel('Section')
+        plt.ylabel('Total Time (Sec)')
+        plt.xticks(rotation=45)
+        plt.show()
+    else:
+        print("No valid data to plot for 'Total Time'.")
+else:
+    print("Error: 'Total Time' column not found in the CSV file.")

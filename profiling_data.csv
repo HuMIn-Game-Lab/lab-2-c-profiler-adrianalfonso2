@@ -1,2 +1,0 @@
-Section,CallCount,TotalTime,MinTime,MaxTime,AvgTime,FileName,FunctionName,LineNumber
-Main,10,1.04682e+06,101169,105119,104682,./Code/main.cpp,main,33
