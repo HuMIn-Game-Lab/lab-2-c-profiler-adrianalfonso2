@@ -59,7 +59,6 @@ void inefficientQuickSort() {
     quickSortInefficient(randomValues, 0, randomValues.size() - 1);
     endProfileSection("InefficientQuickSort");
 }
-
 void depthFirstSearchHelper(int vertex,
  std::vector<bool>& visited,
   const std::vector<std::vector<int>>& adjacencyList) {
@@ -75,7 +74,6 @@ void depthFirstSearchHelper(int vertex,
         endProfileSection("DFSHelper");
     }
 }
-
 void depthFirstSearch(int startVertex, 
 const std::vector<std::vector<int>>& adjacencyList, 
 int vertexCount) {vector<bool> visited(vertexCount, false);

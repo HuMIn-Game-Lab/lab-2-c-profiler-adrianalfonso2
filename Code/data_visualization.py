@@ -8,6 +8,7 @@ pd.set_option('display.max_colwidth', 100)
 
 file_path = ('ProfilerStats.csv')
 data = pd.read_csv("ProfilerStats.csv")
+data.columns = data.columns.str.strip()
 
 if 'Avg Time' in data.columns:
     data = data[data['Avg Time'] > 0]  
