@@ -44,11 +44,19 @@ void quickSortEfficient(vector<int>& arr, int low, int high) {
         }
     }
 }
-void quickSortInefficient(vector<int>& arr, int low, int high) {
+void quickSortInefficient(std::vector<int>& arr, int low, int high) {
     if (low < high) {
-        int pivotIndex = inefficientPartition(arr, low, high);  
-        quickSortInefficient(arr, low, pivotIndex - 1);  
-        quickSortInefficient(arr, pivotIndex + 1, high);
+        int pivotIndex = partition(arr, low, high); 
+        if (pivotIndex - low > high - pivotIndex) {
+            quickSortInefficient(arr, low, pivotIndex - 1);
+            quickSortInefficient(arr, pivotIndex + 1, high);
+        } else {
+            quickSortInefficient(arr, pivotIndex + 1, high);
+            quickSortInefficient(arr, low, pivotIndex - 1);
+        }
+        for (int i = low; i <= high; ++i) {
+            arr[i] = arr[i];  
+        }
     }
 }
 void efficientQuickSort() {
