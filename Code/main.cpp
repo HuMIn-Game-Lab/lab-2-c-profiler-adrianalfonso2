@@ -46,7 +46,7 @@ void quickSortEfficient(vector<int>& arr, int low, int high) {
 }
 void quickSortInefficient(std::vector<int>& arr, int low, int high) {
     if (low < high) {
-        int pivotIndex = partition(arr, low, high); 
+        int pivotIndex = inefficientPartition(arr, low, high); 
         if (pivotIndex - low > high - pivotIndex) {
             quickSortInefficient(arr, low, pivotIndex - 1);
             quickSortInefficient(arr, pivotIndex + 1, high);
@@ -99,7 +99,7 @@ int vertexCount) {vector<bool> visited(vertexCount, false);
     depthFirstSearchHelper(startVertex, visited, adjacencyList);
 }
 void dfsTest() {
-    int vertices = 10;
+    int vertices = 100;
     std::vector<std::vector<int>> adjacencyList(vertices);
     adjacencyList[0].push_back(1);
     adjacencyList[0].push_back(4);
@@ -117,7 +117,7 @@ void dfsTest() {
     endProfileSection("DFSTest");
 }
 void sleepTest() {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 100; i++) {
         startProfileSection("ShortSleepTest");
         startProfileSection("LongSleepTest");
         this_thread::sleep_for(chrono::milliseconds(100));
