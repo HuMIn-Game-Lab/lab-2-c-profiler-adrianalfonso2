@@ -2,10 +2,10 @@
     {
         "Section": "EfficientQuickSort",
         "Call Count": 1000,
-        "Total Time": 130.50259512599996,
-        "Min Time": 0.00032125,
-        "Max Time": 0.250572583,
-        "Avg Time": 0.13050259512599996,
+        "Total Time": 129.253053237,
+        "Min Time": 0.0003315,
+        "Max Time": 0.246508667,
+        "Avg Time": 0.12925305323699998,
         "File Name": "./Code/main.cpp",
         "Function Name": "efficientQuickSort",
         "Line Number": 44
@@ -13,10 +13,10 @@
     {
         "Section": "InefficientQuickSort",
         "Call Count": 1000,
-        "Total Time": 130.62787374799996,
-        "Min Time": 0.000438333,
-        "Max Time": 0.250685875,
-        "Avg Time": 0.13062787374799995,
+        "Total Time": 129.376381771,
+        "Min Time": 0.000449542,
+        "Max Time": 0.246622375,
+        "Avg Time": 0.12937638177100003,
         "File Name": "./Code/main.cpp",
         "Function Name": "inefficientQuickSort",
         "Line Number": 60
@@ -24,10 +24,10 @@
     {
         "Section": "DFSHelper",
         "Call Count": 11,
-        "Total Time": 0.000286000000000064,
-        "Min Time": 9.874999999992529e-06,
-        "Max Time": 4.9292000000034086e-05,
-        "Avg Time": 2.6000000000005816e-05,
+        "Total Time": 0.00026408200000005433,
+        "Min Time": 9.625000000013095e-06,
+        "Max Time": 4.429200000000133e-05,
+        "Avg Time": 2.4007454545459485e-05,
         "File Name": "./Code/main.cpp",
         "Function Name": "depthFirstSearchHelper",
         "Line Number": 75
@@ -46,10 +46,10 @@
     {
         "Section": "ShortSleepTest",
         "Call Count": 10,
-        "Total Time": 0.9388802080000004,
-        "Min Time": 0.10069529099999996,
-        "Max Time": 0.10505816699999992,
-        "Avg Time": 0.09388802080000004,
+        "Total Time": 0.942970042,
+        "Min Time": 0.102542417,
+        "Max Time": 0.10509141600000005,
+        "Avg Time": 0.0942970042,
         "File Name": "./Code/main.cpp",
         "Function Name": "sleepTest",
         "Line Number": 108
@@ -57,10 +57,10 @@
     {
         "Section": "LongSleepTest",
         "Call Count": 10,
-        "Total Time": 13.515219455,
-        "Min Time": 0.669848333,
-        "Max Time": 2.337432291,
-        "Avg Time": 1.3515219455,
+        "Total Time": 13.537001335,
+        "Min Time": 0.666310292,
+        "Max Time": 2.345232042,
+        "Avg Time": 1.3537001334999998,
         "File Name": "./Code/main.cpp",
         "Function Name": "sleepTest",
         "Line Number": 110
