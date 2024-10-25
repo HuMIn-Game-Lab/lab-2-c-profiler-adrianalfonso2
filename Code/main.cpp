@@ -5,22 +5,32 @@
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
-
 using namespace std;
 Profiler *globalProfiler = new Profiler();
 
 int partition(vector<int>& arr, int low, int high) {
-    int pivot = arr[high]; 
+    int pivot = arr[high];
     int i = low - 1;
     for (int j = low; j < high; j++) {
         if (arr[j] < pivot) {
             i++;
-            std::swap(arr[i], arr[j]);
+            swap(arr[i], arr[j]);
         }
     }
-
-    std::swap(arr[i + 1], arr[high]);
+    swap(arr[i + 1], arr[high]);
     return (i + 1);
+}
+int inefficientPartition(vector<int>& arr, int low, int high) {
+    int pivot = arr[low];  
+    int i = low + 1;
+    for (int j = low + 1; j <= high; j++) {
+        if (arr[j] < pivot) {
+            swap(arr[i], arr[j]);
+            i++;
+        }
+    }
+    swap(arr[low], arr[i - 1]);
+    return i - 1;
 }
 void quickSortEfficient(vector<int>& arr, int low, int high) {
     while (low < high) {
@@ -34,31 +44,32 @@ void quickSortEfficient(vector<int>& arr, int low, int high) {
         }
     }
 }
+void quickSortInefficient(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int pivotIndex = inefficientPartition(arr, low, high);  
+        quickSortInefficient(arr, low, pivotIndex - 1);  
+        quickSortInefficient(arr, pivotIndex + 1, high);
+    }
+}
 void efficientQuickSort() {
     vector<int> randomValues;
-    for (int i = 0; i < 1000; i++) {
-        randomValues.push_back(rand() % 1000);
+    for (int i = 0; i < 500000; i++) {  
+        randomValues.push_back(rand() % 1000000);
     }
     startProfileSection("EfficientQuickSort");
     quickSortEfficient(randomValues, 0, randomValues.size() - 1);
     endProfileSection("EfficientQuickSort");
 }
-void quickSortInefficient(vector<int>& arr, int low, int high) {
-    if (low < high) {
-        int pivotIndex = partition(arr, low, high);
-        quickSortInefficient(arr, low, pivotIndex - 1);
-        quickSortInefficient(arr, pivotIndex + 1, high);
-    }
-}
 void inefficientQuickSort() {
     vector<int> randomValues;
-    for (int i = 0; i < 1000; i++) {
-        randomValues.push_back(rand() % 1000);
+    for (int i = 0; i < 500000; i++) {  
+        randomValues.push_back(rand() % 1000000);
     }
     startProfileSection("InefficientQuickSort");
     quickSortInefficient(randomValues, 0, randomValues.size() - 1);
     endProfileSection("InefficientQuickSort");
 }
+
 void depthFirstSearchHelper(int vertex,
  std::vector<bool>& visited,
   const std::vector<std::vector<int>>& adjacencyList) {
@@ -79,9 +90,8 @@ const std::vector<std::vector<int>>& adjacencyList,
 int vertexCount) {vector<bool> visited(vertexCount, false);
     depthFirstSearchHelper(startVertex, visited, adjacencyList);
 }
-
 void dfsTest() {
-    int vertices = 5;
+    int vertices = 10;
     std::vector<std::vector<int>> adjacencyList(vertices);
     adjacencyList[0].push_back(1);
     adjacencyList[0].push_back(4);
